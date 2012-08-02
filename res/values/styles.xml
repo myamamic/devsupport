@@ -2,4 +2,71 @@
 
     <style name="AppTheme" parent="android:Theme.Light" />
 
+    <style name="TextLabelLayout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textAppearance">@style/TextAppearance.info_label</item>
+        <item name="android:paddingRight">4dip</item>
+    </style>
+
+    <style name="TextValueLayout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textAppearance">@style/TextAppearance.info_value</item>
+        <item name="android:paddingRight">4dip</item>
+    </style>
+
+    <style name="ButtonLayout">
+        <item name="android:layout_width">150dip</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="EditText_NumberSigned">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:inputType">numberSigned</item>
+        <item name="android:singleLine">true</item>
+    </style>
+
+    <style name="TextDescriptionLayout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textAppearance">@style/TextAppearance.info_value</item>
+    </style>
+
+    <style name="View_DeviderLineHorizontal"> 
+        <item name="android:background">#FFFFFFFF</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">3dip</item>
+        <item name="android:paddingTop">4dip</item>
+        <item name="android:paddingBottom">4dip</item>
+    </style>
+
+    <style name="View_DeviderLineVertical"> 
+        <item name="android:background">#FFFFFFFF</item>
+        <item name="android:layout_width">3dip</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:paddingTop">4dip</item>
+        <item name="android:paddingBottom">4dip</item>
+    </style>
+
+    <style name="TextAppearance" parent="android:TextAppearance">
+    </style>
+
+    <style name="TextAppearance.info_label">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextAppearance.info_value">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
 </resources>
