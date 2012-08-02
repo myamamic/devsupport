@@ -26,6 +26,15 @@
         </activity>
 
         <!-- Test activities -->
+        <activity android:name=".apps.AppInstallFromGooglePlay"
+            android:label="@string/apps_install"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.MYAMAMIC_SUPPORT_ACTIVITIES" />
+            </intent-filter>
+        </activity>
+
         <activity android:name=".template.HelloWorld"
             android:label="@string/template_helloworld"
             android:exported="true" >
