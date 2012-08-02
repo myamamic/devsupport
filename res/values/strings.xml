@@ -1,11 +1,17 @@
 <resources>
 
     <string name="app_name">DevSupport</string>
-    <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
     <string name="title_activity_main">Choose menu</string>
 
+    <!-- test list -->
+    <string name="template_helloworld">Template/Hello world</string>
+
     <!-- Utility -->
     <string name="confirm_finish">Are you sure you want to finish this test?</string>
+
+    <!-- ============================================================================ -->
+    <!-- For template activity -->
+    <string name="hello">Hello world!</string>
 
 </resources>
