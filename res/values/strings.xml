@@ -1,7 +1,7 @@
 <resources>
 
+    <!-- MainActivity -->
     <string name="app_name">DevSupport</string>
-    <string name="menu_settings">Settings</string>
     <string name="title_activity_main">Choose menu</string>
 
     <!-- test list -->
