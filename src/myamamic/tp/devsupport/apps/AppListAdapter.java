@@ -7,10 +7,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -88,7 +86,6 @@ public class AppListAdapter extends BaseAdapter {
             holder = new ViewHolder();
             holder.icon = (ImageView)convertView.findViewById(R.id.app_image_icon);
             holder.name = (TextView)convertView.findViewById(R.id.app_name_text);
-            holder.button = (Button)convertView.findViewById(R.id.app_install_button);
 
             convertView.setTag(holder);
         } else {
@@ -99,26 +96,14 @@ public class AppListAdapter extends BaseAdapter {
 
         // Bind the data efficiently with the holder.
         String app = mAppList.get(position);
-/*
-        if (!file.isDirectory()) {
-            // Disregards item excluding directory.
-            return convertView;
-        }
-*/
+
         holder.icon.setImageBitmap(mFolderIcon);
         holder.name.setText(app);
-        holder.button.setOnClickListener(new OnClickListener() { 
-            @Override
-            public void onClick(View v) {
-                android.util.Log.e("YAMAICHI", "install!!");
-            }
-        });
         return convertView;
     }
 
     static class ViewHolder {
         ImageView icon;
         TextView name;
-        Button button;
     }
 }
