@@ -4,6 +4,7 @@ package myamamic.tp.devsupport.apps;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -25,11 +26,11 @@ public class AppInstallFromGooglePlay extends BaseTestActivity {
         ListView listView = new ListView(getApplicationContext());
         setContentView(listView);
 
-        mAppListAdapter = new AppListAdapter(getApplicationContext(), null);
+        initialize();
+
+        mAppListAdapter = new AppListAdapter(getApplicationContext(), mAppList);
         listView.setAdapter(mAppListAdapter);
         listView.setOnItemClickListener(mOnItemClickListener);
-
-        initialize();
     }
 
     protected void initialize() {
@@ -44,7 +45,10 @@ public class AppInstallFromGooglePlay extends BaseTestActivity {
             = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> adapterView, View view, int pos, long id) {
-            mAppListAdapter.getItem(pos);
+            String name = (String)mAppListAdapter.getItem(pos);
+            if (name != null) {
+                OpenAppPageOnGooglePlay(name);
+            }
         }
     };
 
@@ -53,6 +57,7 @@ public class AppInstallFromGooglePlay extends BaseTestActivity {
         sb.append("market://details?id=");
         sb.append(packageName);
         sb.append("&hl=ja");
+        Log.i(TAG, "Open url: " + sb.toString());
 
         Uri uri = Uri.parse(sb.toString());
         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
