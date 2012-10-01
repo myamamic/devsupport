@@ -6,6 +6,7 @@
 
     <!-- test list -->
     <string name="apps_install">Application/Install from Google Play(need Google account)</string>
+    <string name="wifi_onofflooptest">Wi-Fi/ON OFF loop test</string>
     <string name="gps_onofflooptest">GPS/ON OFF loop test (*Need platform signature)</string>
     <string name="template_helloworld">Template/Hello world</string>
 
@@ -17,6 +18,22 @@
     <!-- ============================================================================ -->
     <!-- AppInstallFromGooglePlay.java -->
     <!-- nothing -->
+
+    <!-- WifiOnOffTest.java -->
+    <!-- use from layout xml -->
+    <string name="wifi_button_description">Toggle Wi-Fi</string>
+    <string name="wifi_loop_description">Wi-Fi ON/OFF loop settings</string>
+    <string name="wifi_wait_enabled">Waiting for Wi-Fi to be enabled (ms)</string>
+    <string name="wifi_wait_disabled">Waiting for Wi-Fi to be disabled (ms)</string>
+    <string name="wifi_on_count_label">Wi-Fi on count</string>
+    <string name="wifi_off_count_label">Wi-Fi off count</string>
+    <string name="wifi_on_fail_count_label">Wi-Fi on FAIL count</string>
+    <string name="wifi_off_fail_count_label">Wi-Fi off FAIL count</string>
+    <!-- use from java source -->
+    <string name="wifi_on">Wifi ON</string>
+    <string name="wifi_off">Wifi OFF</string>
+    <string name="wifi_enabling_error">Could not enable Wi-Fi &#8230;</string>
+    <string name="wifi_disabling_error">Could not disable Wi-Fi &#8230;</string>
 
     <!-- GpsOnOffTest.java -->
     <!-- use from layout xml -->
