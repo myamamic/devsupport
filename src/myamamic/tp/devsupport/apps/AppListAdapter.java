@@ -13,21 +13,31 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class AppListAdapter extends BaseAdapter {
     private static final String TAG = "AppListAdapter";
 
+    private final String KEY_PACKAGENAME = "key_packagename";
+    private final String KEY_DESCRIPTION = "key_description";
+
     private Bitmap mFolderIcon;
     private LayoutInflater mInflater;
-    private ArrayList<String> mAppList = new ArrayList<String>();
+    private ArrayList<Map> mAppList = new ArrayList<Map>();
 
-    public AppListAdapter(Context context, ArrayList<String> appList) {
-        mAppList = appList;
-
-        mFolderIcon = BitmapFactory.decodeResource(context.getResources(), android.R.drawable.ic_lock_silent_mode);
+    public AppListAdapter(Context context) {
+        mFolderIcon = BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_launcher);
 
         // Cache the LayoutInflate to avoid asking for a new one each time.
         mInflater = LayoutInflater.from(context);
+    }
+
+    public void addItem(String packageName, String description) {
+        Map map = new HashMap<String, String>();
+        map.put(KEY_PACKAGENAME, packageName);
+        map.put(KEY_DESCRIPTION, description);
+        mAppList.add(map);
     }
 
     /**
@@ -50,6 +60,22 @@ public class AppListAdapter extends BaseAdapter {
      */
     public Object getItem(int position) {
         return mAppList.get(position);
+    }
+
+    public String getItemAppName(int position) {
+        Map map = mAppList.get(position);
+        if (map == null) {
+            return null;
+        }
+        return (String)map.get(KEY_PACKAGENAME);
+    }
+
+    public String getItemDescription(int position) {
+        Map map = mAppList.get(position);
+        if (map == null) {
+            return null;
+        }
+        return (String)map.get(KEY_DESCRIPTION);
     }
 
     /**
@@ -83,6 +109,7 @@ public class AppListAdapter extends BaseAdapter {
             holder = new ViewHolder();
             holder.icon = (ImageView)convertView.findViewById(R.id.app_image_icon);
             holder.name = (TextView)convertView.findViewById(R.id.app_name_text);
+            holder.description = (TextView)convertView.findViewById(R.id.app_description_text);
 
             convertView.setTag(holder);
         } else {
@@ -92,15 +119,15 @@ public class AppListAdapter extends BaseAdapter {
         }
 
         // Bind the data efficiently with the holder.
-        String app = mAppList.get(position);
-
         holder.icon.setImageBitmap(mFolderIcon);
-        holder.name.setText(app);
+        holder.name.setText(getItemAppName(position));
+        holder.description.setText(getItemDescription(position));
         return convertView;
     }
 
     static class ViewHolder {
         ImageView icon;
         TextView name;
+        TextView description;
     }
 }

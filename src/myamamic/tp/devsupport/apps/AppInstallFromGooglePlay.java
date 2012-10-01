@@ -10,13 +10,10 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import myamamic.tp.devsupport.BaseTestActivity;
 
-import java.util.ArrayList;
-
 public class AppInstallFromGooglePlay extends BaseTestActivity {
     private static final String TAG = "AppInstallFromGooglePlay";
 
     private AppListAdapter mAppListAdapter;
-    private ArrayList<String> mAppList = new ArrayList<String>(); // TEST
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -26,18 +23,20 @@ public class AppInstallFromGooglePlay extends BaseTestActivity {
         ListView listView = new ListView(getApplicationContext());
         setContentView(listView);
 
-        initialize();
-
-        mAppListAdapter = new AppListAdapter(getApplicationContext(), mAppList);
+        mAppListAdapter = new AppListAdapter(getApplicationContext());
         listView.setAdapter(mAppListAdapter);
         listView.setOnItemClickListener(mOnItemClickListener);
+
+        initialize();
     }
 
     protected void initialize() {
         // TEST
-        mAppList.add("com.electricsheep.asi");
-        mAppList.add("jp.smapho.battery_mix");
-        mAppList.add("com.skype.raider");
+        if (mAppListAdapter != null) {
+            mAppListAdapter.addItem("com.electricsheep.asi", "Android System Info - Display device information");
+            mAppListAdapter.addItem("jp.smapho.battery_mix", "Battery Mix - Display battery info");
+            mAppListAdapter.addItem("com.skype.raider", "Skype");
+        }
         // TEST
     }
 
@@ -45,7 +44,7 @@ public class AppInstallFromGooglePlay extends BaseTestActivity {
             = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> adapterView, View view, int pos, long id) {
-            String name = (String)mAppListAdapter.getItem(pos);
+            String name = mAppListAdapter.getItemAppName(pos);
             if (name != null) {
                 OpenAppPageOnGooglePlay(name);
             }
