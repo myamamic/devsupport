@@ -1,0 +1,20 @@
+<resources>
+
+    <!-- MainActivity -->
+    <string name="app_name">DevSupport</string>
+    <string name="title_activity_main">Choose menu</string>
+
+    <!-- test list -->
+    <string name="apps_install">Application/Install from Google Play(need Google account)</string>
+    <string name="template_helloworld">Template/Hello world</string>
+
+    <!-- Utility -->
+    <string name="confirm_finish">Are you sure you want to finish this test?</string>
+
+    <!-- ============================================================================ -->
+    <!-- For application install activity -->
+
+    <!-- For template activity -->
+    <string name="hello">Hello world!</string>
+
+</resources>
