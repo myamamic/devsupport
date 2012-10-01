@@ -5,7 +5,7 @@
     <string name="title_activity_main">Choose menu</string>
 
     <!-- test list -->
-    <string name="apps_install">Application/Install from Google Play(need Google acount)</string>
+    <string name="apps_install">Application/Install from Google Play(need Google account)</string>
     <string name="template_helloworld">Template/Hello world</string>
 
     <!-- Utility -->
