@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <TextView
+        android:text="@string/gps_button_description"
+        style="@style/TextLabelLayout"/>
+	<Button
+	    android:id="@+id/gps_button"
+	    style="@style/ButtonLayout"/>
+
+	<View style="@style/View_DeviderLineHorizontal" />
+
+	<TextView
+	    android:text="@string/gps_loop_description"
+	    style="@style/TextLabelLayout" />
+	<LinearLayout
+	    android:orientation="horizontal"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content">
+	    <TextView
+	        android:text="@string/gps_wait_enabled"
+	        style="@style/TextDescriptionLayout" />
+	    <EditText
+	        android:id="@+id/gps_edittext_wait_enabled"
+	        style="@style/EditText_NumberSigned" />
+	</LinearLayout>
+	<LinearLayout
+	    android:orientation="horizontal"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content">
+	    <TextView
+	        android:text="@string/gps_wait_disabled"
+	        style="@style/TextDescriptionLayout" />
+	    <EditText
+	        android:id="@+id/gps_edittext_wait_disabled"
+	        style="@style/EditText_NumberSigned" />
+	</LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/gps_button_running_start"
+            android:layout_weight="1"
+            android:text="@string/start"
+            style="@style/ButtonLayout" />
+        <Button
+            android:id="@+id/gps_button_running_stop"
+            android:layout_weight="1"
+            android:text="@string/stop"
+            style="@style/ButtonLayout" />
+	</LinearLayout>
+	
+    <View style="@style/View_DeviderLineHorizontal" />
+
+    <include layout="@layout/gps_onoff_status" />
+
+</LinearLayout>

@@ -6,13 +6,33 @@
 
     <!-- test list -->
     <string name="apps_install">Application/Install from Google Play(need Google account)</string>
+    <string name="gps_onofflooptest">GPS/ON OFF loop test (*Need platform signature)</string>
     <string name="template_helloworld">Template/Hello world</string>
 
     <!-- Utility -->
+    <string name="start">START</string>
+    <string name="stop">STOP</string>
     <string name="confirm_finish">Are you sure you want to finish this test?</string>
 
     <!-- ============================================================================ -->
-    <!-- For application install activity -->
+    <!-- AppInstallFromGooglePlay.java -->
+    <!-- nothing -->
+
+    <!-- GpsOnOffTest.java -->
+    <!-- use from layout xml -->
+    <string name="gps_button_description">Toggle GPS</string>
+    <string name="gps_loop_description">GPS ON/OFF loop settings</string>
+    <string name="gps_wait_enabled">Waiting for GPS to be enabled (ms)</string>
+    <string name="gps_wait_disabled">Waiting for GPS to be disabled (ms)</string>
+    <string name="gps_on_count_label">GPS on count</string>
+    <string name="gps_off_count_label">GPS off count</string>
+    <string name="gps_on_fail_count_label">GPS on FAIL count</string>
+    <string name="gps_off_fail_count_label">GPS off FAIL count</string>
+    <!-- use from java source -->
+    <string name="gps_on">GPS ON</string>
+    <string name="gps_off">GPS OFF</string>
+    <string name="gps_enabling_error">Could not enable GPS &#8230;</string>
+    <string name="gps_disabling_error">Could not disable GPS &#8230;</string>
 
     <!-- For template activity -->
     <string name="hello">Hello world!</string>

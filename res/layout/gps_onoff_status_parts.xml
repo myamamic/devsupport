@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/myamamic.tp.devsupport" >
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1" >
+        <myamamic.tp.devsupport.CountView
+            android:id="@+id/gps_on_count"
+            style="@style/TextDescriptionLayout"
+            app:label_text="@string/gps_on_count_label" />
+        <myamamic.tp.devsupport.CountView
+            android:id="@+id/gps_off_count"
+            style="@style/TextDescriptionLayout"
+            app:label_text="@string/gps_off_count_label" />
+        <myamamic.tp.devsupport.CountView
+            android:id="@+id/gps_on_fail_count"
+            style="@style/TextDescriptionLayout"
+            app:label_text="@string/gps_on_fail_count_label" />
+        <myamamic.tp.devsupport.CountView
+            android:id="@+id/gps_off_fail_count"
+            style="@style/TextDescriptionLayout"
+            app:label_text="@string/gps_off_fail_count_label" />
+    </LinearLayout>
+    <TextView
+        android:id="@+id/gps_state"
+        android:layout_width="match_parent" 
+        android:layout_height="match_parent"
+        android:layout_weight="1" 
+        android:gravity="center"
+        android:textSize="32dip"
+        android:textStyle="bold"/>
+</merge>

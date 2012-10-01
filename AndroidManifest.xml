@@ -35,6 +35,15 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".gps.GpsOnOffTest"
+            android:label="@string/gps_onofflooptest"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.MYAMAMIC_SUPPORT_ACTIVITIES" />
+            </intent-filter>
+        </activity>
+
         <activity android:name=".template.HelloWorld"
             android:label="@string/template_helloworld"
             android:exported="true" >
