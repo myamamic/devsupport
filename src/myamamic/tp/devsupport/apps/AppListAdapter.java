@@ -22,10 +22,7 @@ public class AppListAdapter extends BaseAdapter {
     private ArrayList<String> mAppList = new ArrayList<String>();
 
     public AppListAdapter(Context context, ArrayList<String> appList) {
-        //mAppList = appList;
-        mAppList.add("AAA");
-        mAppList.add("BBB");
-        mAppList.add("CCC");
+        mAppList = appList;
 
         mFolderIcon = BitmapFactory.decodeResource(context.getResources(), android.R.drawable.ic_lock_silent_mode);
 
@@ -45,7 +42,7 @@ public class AppListAdapter extends BaseAdapter {
 
     /**
      * Since the data comes from an array, just returning the index is
-     * sufficent to get at the data. If we were using a more complex data
+     * sufficient to get at the data. If we were using a more complex data
      * structure, we would return whatever object represents one row in the
      * list.
      *
@@ -71,12 +68,12 @@ public class AppListAdapter extends BaseAdapter {
      *      android.view.ViewGroup)
      */
     public View getView(int position, View convertView, ViewGroup parent) {
-        // A ViewHolder keeps references to children views to avoid unneccessary calls
+        // A ViewHolder keeps references to children views to avoid unnecessary calls
         // to findViewById() on each row.
         ViewHolder holder;
 
         // When convertView is not null, we can reuse it directly, there is no need
-        // to reinflate it. We only inflate a new View when the convertView supplied
+        // to re-inflate it. We only inflate a new View when the convertView supplied
         // by ListView is null.
         if (convertView == null) {
             convertView = mInflater.inflate(R.layout.app_list_item, null);
