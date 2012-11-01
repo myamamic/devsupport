@@ -19,6 +19,7 @@ import android.util.Log;
 import android.util.SparseArray;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.WindowManager.LayoutParams;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -62,6 +63,7 @@ public class BluetoothOnOffTest extends BaseTestActivity {
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        this.getWindow().setSoftInputMode(LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         setContentView(R.layout.bluetooth_onoff_control);
 
         mBtReceiver = new BluetoothBroadcastReceiver();
