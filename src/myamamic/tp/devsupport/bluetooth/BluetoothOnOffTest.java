@@ -31,6 +31,7 @@ public class BluetoothOnOffTest extends BaseTestActivity {
     private static final int EVENT_ENABLE_BT = 1;
     private static final int EVENT_DISABLE_BT = 2;
 
+    private static final String LOG_FILE_PATH = "/sdcard/bt_loop.txt";
 
     private static final SparseArray<String> sBtStateMap = new SparseArray<String>() {{
         put(BluetoothAdapter.STATE_ON,          "BT ON");
@@ -303,7 +304,7 @@ public class BluetoothOnOffTest extends BaseTestActivity {
 
     private void outputBluetoothOnOffCount(boolean on, int count, boolean append) {
         String result = Utility.getDate() + "    " + (on ? "ON" : "OFF") + "(" + String.valueOf(count) + ")";
-        Utility.writeResultToFile("/sdcard/bt_loop.txt", result, append);
+        Utility.writeResultToFile(LOG_FILE_PATH, result, append);
     }
 
     private void updateBtButtonState(boolean force, boolean forceState) {

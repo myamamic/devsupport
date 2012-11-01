@@ -19,6 +19,8 @@ import myamamic.tp.devsupport.*;
 public class WifiOnOffTest extends BaseTestActivity {
     private static final String TAG = "WifiOnOffTest";
 
+    private static final String LOG_FILE_PATH = "/sdcard/wifi_loop.txt";
+
     private static final int EVENT_ENABLE_WIFI  = 1;
     private static final int EVENT_DISABLE_WIFI = 2;
 
@@ -308,7 +310,7 @@ public class WifiOnOffTest extends BaseTestActivity {
 
     private void outputWifiOnOffCount(boolean on, int count, boolean append) {
         String result = Utility.getDate() + "    " + (on ? "ON" : "OFF") + "(" + String.valueOf(count) + ")";
-        Utility.writeResultToFile("/sdcard/wifi_loop.txt", result, append);
+        Utility.writeResultToFile(LOG_FILE_PATH, result, append);
     }
 
     private void updateWifiButtonState(boolean force, boolean forceState) {

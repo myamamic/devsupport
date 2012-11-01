@@ -23,6 +23,8 @@ import java.util.Observer;
 public class GpsOnOffTest extends BaseTestActivity {
     private static final String TAG = "GpsOnOffTest";
 
+    private static final String LOG_FILE_PATH = "/sdcard/gps_loop.txt";
+
     private static final int EVENT_ENABLE_GPS  = 1;
     private static final int EVENT_DISABLE_GPS = 2;
 
@@ -303,7 +305,7 @@ public class GpsOnOffTest extends BaseTestActivity {
 
     private void outputGpsOnOffCount(boolean on, int count, boolean append) {
         String result = Utility.getDate() + "    " + (on ? "ON" : "OFF") + "(" + String.valueOf(count) + ")";
-        Utility.writeResultToFile("/sdcard/gps_loop.txt", result, append);
+        Utility.writeResultToFile(LOG_FILE_PATH, result, append);
     }
 
     private void updateGpsButtonState(boolean force, boolean forceState) {
