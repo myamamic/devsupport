@@ -1,9 +1,7 @@
 package myamamic.tp.devsupport;
 
 
-import android.app.Activity;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.DialogFragment;
 import android.view.KeyEvent;
 
 public class BaseTestActivity extends FragmentActivity
