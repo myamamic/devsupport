@@ -10,17 +10,21 @@ import android.os.Message;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager.LayoutParams;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import myamamic.tp.devsupport.*;
 
+import java.lang.ref.WeakReference;
 import java.util.HashMap;
 import java.util.Observable;
 import java.util.Observer;
 
 public class GpsOnOffTest extends BaseTestActivity {
     private static final String TAG = "GpsOnOffTest";
+
+    private static final String LOG_FILE_PATH = "/sdcard/gps_loop.txt";
 
     private static final int EVENT_ENABLE_GPS  = 1;
     private static final int EVENT_DISABLE_GPS = 2;
@@ -34,6 +38,7 @@ public class GpsOnOffTest extends BaseTestActivity {
     private Button mGpsButton;
     private Button mGpsRunningStartButton;
     private Button mGpsRunningStopButton;
+    private MyHandler mHandler = null;
 
     // These provide support for receiving notification when Location Manager settings change.
     // This is necessary because the Network Location Provider can change settings
@@ -57,8 +62,17 @@ public class GpsOnOffTest extends BaseTestActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.getWindow().setSoftInputMode(LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         setContentView(R.layout.gps_onoff_control);
+
+        mHandler = new MyHandler(this);
         initialize();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mHandler = null;
     }
 
     private void initialize() {
@@ -141,23 +155,34 @@ public class GpsOnOffTest extends BaseTestActivity {
         super.onPositiveButtonClicked();
     }
 
-    private Handler mHandler = new Handler() {
+    public static class MyHandler extends Handler {
+        private final WeakReference<GpsOnOffTest> mActivity;
+
+        public MyHandler(GpsOnOffTest activity) {
+            mActivity = new WeakReference<GpsOnOffTest>(activity);
+        }
+
         @Override
         public void handleMessage(Message msg) {
+            GpsOnOffTest activity = mActivity.get();
+            if (activity == null) {
+                return;
+            }
+
             switch(msg.what) {
                 case EVENT_ENABLE_GPS:
                     Log.d(TAG, "HANDLE EVENT_ENABLE_GPS");
-                    enableGps(true);
+                    activity.enableGps(true);
                     break;
                 case EVENT_DISABLE_GPS:
                     Log.d(TAG, "HANDLE EVENT_DISABLE_GPS");
-                    enableGps(false);
+                    activity.enableGps(false);
                     break;
                 default:
                     break;
             }
         }
-    };
+    }
 
     private boolean isGpsEnabled() {
         ContentResolver res = getContentResolver();
@@ -301,7 +326,7 @@ public class GpsOnOffTest extends BaseTestActivity {
 
     private void outputGpsOnOffCount(boolean on, int count, boolean append) {
         String result = Utility.getDate() + "    " + (on ? "ON" : "OFF") + "(" + String.valueOf(count) + ")";
-        Utility.writeResultToFile("/sdcard/gps_loop.txt", result, append);
+        Utility.writeResultToFile(LOG_FILE_PATH, result, append);
     }
 
     private void updateGpsButtonState(boolean force, boolean forceState) {
