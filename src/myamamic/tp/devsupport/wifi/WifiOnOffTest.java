@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.util.SparseArray;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -13,8 +14,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import myamamic.tp.devsupport.*;
 
-import java.util.HashMap;
-import java.util.Map;
 
 public class WifiOnOffTest extends BaseTestActivity {
     private static final String TAG = "WifiOnOffTest";
@@ -22,8 +21,7 @@ public class WifiOnOffTest extends BaseTestActivity {
     private static final int EVENT_ENABLE_WIFI  = 1;
     private static final int EVENT_DISABLE_WIFI = 2;
 
-    @SuppressWarnings("serial")
-    private static final Map<Integer, String> sWifiStateMap = new HashMap<Integer, String>() {{
+    private static final SparseArray<String> sWifiStateMap = new SparseArray<String>() {{
         put(WifiManager.WIFI_STATE_ENABLED,     "Wifi ON");
         put(WifiManager.WIFI_STATE_DISABLING,   "Disabling wifi ...");
         put(WifiManager.WIFI_STATE_DISABLED,    "Wifi OFF");
