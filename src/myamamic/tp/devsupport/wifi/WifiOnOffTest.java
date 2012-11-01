@@ -13,6 +13,9 @@ import android.view.WindowManager.LayoutParams;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import java.lang.ref.WeakReference;
+
 import myamamic.tp.devsupport.*;
 
 
@@ -37,6 +40,7 @@ public class WifiOnOffTest extends BaseTestActivity {
     private Button mWifiRunningStopButton;
     private WifiManager mWm = null;
     private WifiBroadcastReceiver mWifiReceiver = null;
+    private MyHandler mHandler = null;
 
     private TextView mWifiState = null;
     private boolean isRunningTest = false;
@@ -60,6 +64,7 @@ public class WifiOnOffTest extends BaseTestActivity {
         this.getWindow().setSoftInputMode(LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         setContentView(R.layout.wifi_onoff_control);
 
+        mHandler = new MyHandler(this);
         mWifiReceiver = new WifiBroadcastReceiver();
         IntentFilter filter = new IntentFilter(WifiManager.WIFI_STATE_CHANGED_ACTION);
         registerReceiver(mWifiReceiver, filter);
@@ -78,6 +83,7 @@ public class WifiOnOffTest extends BaseTestActivity {
         super.onDestroy();
         unregisterReceiver(mWifiReceiver);
         mWifiReceiver = null;
+        mHandler = null;
     }
 
     @Override
@@ -121,23 +127,34 @@ public class WifiOnOffTest extends BaseTestActivity {
         super.onPositiveButtonClicked();
     }
 
-    private Handler mHandler = new Handler() {
+    public static class MyHandler extends Handler {
+        private final WeakReference<WifiOnOffTest> mActivity;
+
+        public MyHandler(WifiOnOffTest activity) {
+            mActivity = new WeakReference<WifiOnOffTest>(activity);
+        }
+
         @Override
         public void handleMessage(Message msg) {
+            WifiOnOffTest activity = mActivity.get();
+            if (activity == null) {
+                return;
+            }
+
             switch(msg.what) {
                 case EVENT_ENABLE_WIFI:
                     Log.d(TAG, "HANDLE EVENT_ENABLE_WIFI");
-                    enableWifi(true);
+                    activity.enableWifi(true);
                     break;
                 case EVENT_DISABLE_WIFI:
                     Log.d(TAG, "HANDLE EVENT_DISABLE_WIFI");
-                    enableWifi(false);
+                    activity.enableWifi(false);
                     break;
                 default:
                     break;
             }
         }
-    };
+    }
 
     // Oneshot wifi on/off
     private OnClickListener mWifiButtonClickedListener = new OnClickListener() {

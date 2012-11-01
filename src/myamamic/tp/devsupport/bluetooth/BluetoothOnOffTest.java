@@ -24,6 +24,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.lang.ref.WeakReference;
+
 
 public class BluetoothOnOffTest extends BaseTestActivity {
     private static final String TAG = "BluetoothOnOffTest";
@@ -45,6 +47,7 @@ public class BluetoothOnOffTest extends BaseTestActivity {
     private Button mBtRunningStopButton;
     private BluetoothAdapter mBtAdapter = null;
     private BluetoothBroadcastReceiver mBtReceiver = null;
+    private MyHandler mHandler = null;
 
     private TextView mBtState = null;
     private boolean isRunningTest = false;
@@ -67,6 +70,7 @@ public class BluetoothOnOffTest extends BaseTestActivity {
         this.getWindow().setSoftInputMode(LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         setContentView(R.layout.bluetooth_onoff_control);
 
+        mHandler = new MyHandler(this);
         mBtReceiver = new BluetoothBroadcastReceiver();
         IntentFilter filter = new IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED);
         registerReceiver(mBtReceiver, filter);
@@ -85,6 +89,7 @@ public class BluetoothOnOffTest extends BaseTestActivity {
         super.onDestroy();
         unregisterReceiver(mBtReceiver);
         mBtReceiver = null;
+        mHandler = null;
     }
 
     @Override
@@ -126,23 +131,34 @@ public class BluetoothOnOffTest extends BaseTestActivity {
         super.onPositiveButtonClicked();
     }
 
-    private Handler mHandler = new Handler() {
+    public static class MyHandler extends Handler {
+        private final WeakReference<BluetoothOnOffTest> mActivity;
+
+        public MyHandler(BluetoothOnOffTest activity) {
+            mActivity = new WeakReference<BluetoothOnOffTest>(activity);
+        }
+
         @Override
         public void handleMessage(Message msg) {
+            BluetoothOnOffTest activity = mActivity.get();
+            if (activity == null) {
+                return;
+            }
+
             switch(msg.what) {
                 case EVENT_ENABLE_BT:
                     Log.d(TAG, "HANDLE EVENT_ENABLE_BT");
-                    enableBluetooth(true);
+                    activity.enableBluetooth(true);
                     break;
                 case EVENT_DISABLE_BT:
                     Log.d(TAG, "HANDLE EVENT_DISABLE_BT");
-                    enableBluetooth(false);
+                    activity.enableBluetooth(false);
                     break;
                 default:
                     break;
             }
         }
-    };
+    }
 
     // Oneshot bluetooth on/off
     private OnClickListener mBtButtonClickedListener = new OnClickListener() {
