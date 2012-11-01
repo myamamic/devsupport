@@ -6,24 +6,28 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.util.SparseArray;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.WindowManager.LayoutParams;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import java.lang.ref.WeakReference;
+
 import myamamic.tp.devsupport.*;
 
-import java.util.HashMap;
-import java.util.Map;
 
 public class WifiOnOffTest extends BaseTestActivity {
     private static final String TAG = "WifiOnOffTest";
 
+    private static final String LOG_FILE_PATH = "/sdcard/wifi_loop.txt";
+
     private static final int EVENT_ENABLE_WIFI  = 1;
     private static final int EVENT_DISABLE_WIFI = 2;
 
-    @SuppressWarnings("serial")
-    private static final Map<Integer, String> sWifiStateMap = new HashMap<Integer, String>() {{
+    private static final SparseArray<String> sWifiStateMap = new SparseArray<String>() {{
         put(WifiManager.WIFI_STATE_ENABLED,     "Wifi ON");
         put(WifiManager.WIFI_STATE_DISABLING,   "Disabling wifi ...");
         put(WifiManager.WIFI_STATE_DISABLED,    "Wifi OFF");
@@ -36,6 +40,7 @@ public class WifiOnOffTest extends BaseTestActivity {
     private Button mWifiRunningStopButton;
     private WifiManager mWm = null;
     private WifiBroadcastReceiver mWifiReceiver = null;
+    private MyHandler mHandler = null;
 
     private TextView mWifiState = null;
     private boolean isRunningTest = false;
@@ -56,8 +61,10 @@ public class WifiOnOffTest extends BaseTestActivity {
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        this.getWindow().setSoftInputMode(LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         setContentView(R.layout.wifi_onoff_control);
 
+        mHandler = new MyHandler(this);
         mWifiReceiver = new WifiBroadcastReceiver();
         IntentFilter filter = new IntentFilter(WifiManager.WIFI_STATE_CHANGED_ACTION);
         registerReceiver(mWifiReceiver, filter);
@@ -76,6 +83,7 @@ public class WifiOnOffTest extends BaseTestActivity {
         super.onDestroy();
         unregisterReceiver(mWifiReceiver);
         mWifiReceiver = null;
+        mHandler = null;
     }
 
     @Override
@@ -119,23 +127,34 @@ public class WifiOnOffTest extends BaseTestActivity {
         super.onPositiveButtonClicked();
     }
 
-    private Handler mHandler = new Handler() {
+    public static class MyHandler extends Handler {
+        private final WeakReference<WifiOnOffTest> mActivity;
+
+        public MyHandler(WifiOnOffTest activity) {
+            mActivity = new WeakReference<WifiOnOffTest>(activity);
+        }
+
         @Override
         public void handleMessage(Message msg) {
+            WifiOnOffTest activity = mActivity.get();
+            if (activity == null) {
+                return;
+            }
+
             switch(msg.what) {
                 case EVENT_ENABLE_WIFI:
                     Log.d(TAG, "HANDLE EVENT_ENABLE_WIFI");
-                    enableWifi(true);
+                    activity.enableWifi(true);
                     break;
                 case EVENT_DISABLE_WIFI:
                     Log.d(TAG, "HANDLE EVENT_DISABLE_WIFI");
-                    enableWifi(false);
+                    activity.enableWifi(false);
                     break;
                 default:
                     break;
             }
         }
-    };
+    }
 
     // Oneshot wifi on/off
     private OnClickListener mWifiButtonClickedListener = new OnClickListener() {
@@ -308,7 +327,7 @@ public class WifiOnOffTest extends BaseTestActivity {
 
     private void outputWifiOnOffCount(boolean on, int count, boolean append) {
         String result = Utility.getDate() + "    " + (on ? "ON" : "OFF") + "(" + String.valueOf(count) + ")";
-        Utility.writeResultToFile("/sdcard/wifi_loop.txt", result, append);
+        Utility.writeResultToFile(LOG_FILE_PATH, result, append);
     }
 
     private void updateWifiButtonState(boolean force, boolean forceState) {

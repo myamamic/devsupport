@@ -7,6 +7,7 @@
     <!-- test list -->
     <string name="apps_install">Application/Install from Google Play(need Google account)</string>
     <string name="wifi_onofflooptest">Wi-Fi/ON OFF loop test</string>
+    <string name="bluetooth_onofflooptest">Bluetooth/ON OFF loop test</string>
     <string name="gps_onofflooptest">GPS/ON OFF loop test (*Need platform signature)</string>
     <string name="template_helloworld">Template/Hello world</string>
 
@@ -34,6 +35,22 @@
     <string name="wifi_off">Wifi OFF</string>
     <string name="wifi_enabling_error">Could not enable Wi-Fi &#8230;</string>
     <string name="wifi_disabling_error">Could not disable Wi-Fi &#8230;</string>
+
+    <!-- BluetoothOnOffTest.java -->
+    <!-- use from layout xml -->
+    <string name="bt_button_description">Toggle bluetooth</string>
+    <string name="bt_loop_description">Bluetooth ON/OFF loop settings</string>
+    <string name="bt_wait_enabled">Waiting for bluetooth to be enabled (ms)</string>
+    <string name="bt_wait_disabled">Waiting for bluetooth to be disabled (ms)</string>
+    <string name="bt_on_count_label">Bluetooth on count</string>
+    <string name="bt_off_count_label">Bluetooth off count</string>
+    <string name="bt_on_fail_count_label">Bluetooth on FAIL count</string>
+    <string name="bt_off_fail_count_label">Bluetooth off FAIL count</string>
+    <!-- use from java source -->
+    <string name="bt_on">BT ON</string>
+    <string name="bt_off">BT OFF</string>
+    <string name="bt_enabling_error">Could not enable Bluetooth &#8230;</string>
+    <string name="bt_disabling_error">Could not disable Bluetooth &#8230;</string>
 
     <!-- GpsOnOffTest.java -->
     <!-- use from layout xml -->

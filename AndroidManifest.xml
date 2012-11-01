@@ -11,6 +11,9 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <!-- BluetoothOnOffTest -->
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <!-- GpsOnOffTest -->
     <!-- android.permission.WRITE_SECURE_SETTINGS needs platform signature -->
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
@@ -45,6 +48,14 @@
 
         <activity android:name=".wifi.WifiOnOffTest"
             android:label="@string/wifi_onofflooptest" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.MYAMAMIC_SUPPORT_ACTIVITIES" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".bluetooth.BluetoothOnOffTest"
+            android:label="@string/bluetooth_onofflooptest" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.MYAMAMIC_SUPPORT_ACTIVITIES" />
